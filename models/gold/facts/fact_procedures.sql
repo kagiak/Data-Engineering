@@ -5,16 +5,16 @@ with proc as (
 
 enc as (
     select
-        Id as encounter_id,
-        PATIENT as patient_id,
-        PAYER as payer_id
-    from {{ ref('stg_encounters') }}
+        ENCOUNTER_ID,
+        PATIENT_ID,
+        PAYER_ID
+    from {{ ref('dim_encounters') }}
 ),
 
 payers as (
     select
-        Id as payer_id,
-        NAME as payer_name
+        PAYER_ID,
+        PAYER_NAME
     from {{ ref('dim_payers') }}
 )
 
@@ -29,10 +29,10 @@ select
     p.MONTH_NUMBER,
     p.WEEK_NUMBER,
     p.DAY_NAME,
-    e.payer_id,
-    pay.payer_name
+    e.PAYER_ID,
+    pay.PAYER_NAME
 from proc p
 left join enc e
-  on p.ENCOUNTER = e.encounter_id
+  on p.ENCOUNTER = e.ENCOUNTER_ID
 left join payers pay
-  on e.payer_id = pay.payer_id
+  on e.PAYER_ID = pay.PAYER_ID
