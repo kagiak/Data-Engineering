@@ -6,32 +6,66 @@ profile: healthcare_etl
 
 model-paths: ["models"]
 seed-paths: ["seeds"]
-analysis-paths: ["analysis"]
-macro-paths: ["macros"]
-snapshot-paths: ["snapshots"]
-test-paths: ["tests"]
 
 models:
   healthcare_etl:
-    staging:
-      +schema: staging
-      +materialized: view
-      procedures:
-        +tags: ["staging", "cleaning"]
-      patients:
-        +tags: ["staging", "cleaning"]
-      encounters:
-        +tags: ["staging", "cleaning"]
-      payers:
-        +tags: ["staging", "cleaning"]
 
+    # -----------------------------------------
+    # BRONZE — RAW DATA (from seeds)
+    # -----------------------------------------
+    bronze:
+      +schema: bronze
+      +materialized: table
+
+      procedures_raw:
+      patients_raw:
+      encounters_raw:
+      payers_raw:
+
+    # -----------------------------------------
+    # SILVER — CLEANED, TYPED, CONSISTENT
+    # -----------------------------------------
     silver:
       +schema: silver
       +materialized: view
-      fact_prepared_procedures:
-        +tags: ["intermediate", "duration", "costs"]
 
+      stg_procedures:
+      stg_patients:
+      stg_encounters:
+      stg_payers:
+
+    # -----------------------------------------
+    # GOLD — BUSINESS MODELS
+    # -----------------------------------------
     gold:
       +schema: gold
       +materialized: table
 
+      dimensions:
+        dim_patients:
+        dim_payers:
+        dim_procedure_codes:
+
+      facts:
+        fact_procedures:
+
+    # -----------------------------------------
+    # ANALYSIS — FINAL SQL QUERIES
+    # -----------------------------------------
+    analysis:
+      +schema: analysis
+      +materialized: view
+
+      payer_ranking:
+      top5_patients:
+      top5_procedures_daily_cost:
+
+seeds:
+  healthcare_etl:
+    +schema: bronze
+    +quote_columns: false
+
+    procedures:
+    patients:
+    encounters:
+    payers:
