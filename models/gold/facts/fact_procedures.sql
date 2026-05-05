@@ -4,23 +4,35 @@ with proc as (
 ),
 
 enc as (
-    select encounter_id, patient_id, payer_id
+    select
+        Id as encounter_id,
+        PATIENT as patient_id,
+        PAYER as payer_id
     from {{ ref('stg_encounters') }}
+),
+
+payers as (
+    select
+        Id as payer_id,
+        NAME as payer_name
+    from {{ ref('dim_payers') }}
 )
 
 select
-    p.procedure_id,
-    p.patient,
-    p.encounter,
-    p.code,
-    p.base_cost,
-    p.duration_seconds,
-    p.cost_per_day,
-    p.year,
-    p.month_number,
-    p.week_number,
-    p.day_name,
-    e.payer_id
+    p.PATIENT,
+    p.ENCOUNTER,
+    p.CODE,
+    p.BASE_COST,
+    p.DURATION_SECONDS,
+    p.COST_PER_DAY,
+    p.YEAR,
+    p.MONTH_NUMBER,
+    p.WEEK_NUMBER,
+    p.DAY_NAME,
+    e.payer_id,
+    pay.payer_name
 from proc p
 left join enc e
-  on p.encounter = e.encounter_id
+  on p.ENCOUNTER = e.encounter_id
+left join payers pay
+  on e.payer_id = pay.payer_id
