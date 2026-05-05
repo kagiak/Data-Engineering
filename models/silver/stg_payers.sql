@@ -1,6 +1,6 @@
 select
-  Id as PAYER_Id,
-  NAME as PAYER_NAME,
+  Id,
+  NAME,
   ADDRESS,
   CITY,
   STATE_HEADQUARTERED,
