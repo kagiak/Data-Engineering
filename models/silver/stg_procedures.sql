@@ -15,18 +15,18 @@ with cleaned as (
 with_duration as (
     select
         *,
-        unix_timestamp(stop) - unix_timestamp(start) as duration_seconds  -- Find duration in seconds
+        unix_timestamp(stop) - unix_timestamp(start) as DURATION_SECONDS  -- Find duration in seconds
     from cleaned
 ),
 
 with_date_parts as (
     select
         *,
-        year(start) as year,
-        month(start) as month_number,
-        date_format(start, 'MMMM') as month_name,
-        weekofyear(start) as week_number,
-        date_format(start, 'EEEE') as day_name
+        year(start) as YEAR,
+        month(start) as MONTH_NUMBER,
+        date_format(start, 'MMMM') as MONTH_NAME,
+        weekofyear(start) as WEEK_NUMBER,
+        date_format(start, 'EEEE') as DAY_NAME
     from with_duration
 )
 
