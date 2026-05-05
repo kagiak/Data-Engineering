@@ -65,14 +65,24 @@ models:
     # GOLD — DIMENSIONS + FACT + ANALYSIS
     # -------------------------------------------------
     gold:
-      +schema: gold
-      +materialized: view
+      dimensions:
+        +schema: gold
+        +materialized: table
 
-      dim_procedure_codes:
-      dim_patients:
-      dim_payers:
-      fact_procedures:
+        dim_procedure_codes:
+        dim_patients:
+        dim_payers:
 
-      payer_ranking:
-      top5_patients:
-      top5_procedures_daily_cost:
+      facts:
+        +schema: gold
+        +materialized: table
+
+        fact_procedures:
+
+      analysis:
+        +schema: gold
+        +materialized: view
+
+        payer_ranking:
+        top5_patients:
+        top5_procedures_daily_cost:
