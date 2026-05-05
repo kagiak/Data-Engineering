@@ -1,0 +1,37 @@
+name: healthcare_etl
+version: 1.0.0
+config-version: 2
+
+profile: healthcare_etl
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+analysis-paths: ["analysis"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+test-paths: ["tests"]
+
+models:
+  healthcare_etl:
+    staging:
+      +schema: staging
+      +materialized: view
+      procedures:
+        +tags: ["staging", "cleaning"]
+      patients:
+        +tags: ["staging", "cleaning"]
+      encounters:
+        +tags: ["staging", "cleaning"]
+      payers:
+        +tags: ["staging", "cleaning"]
+
+    silver:
+      +schema: silver
+      +materialized: view
+      fact_prepared_procedures:
+        +tags: ["intermediate", "duration", "costs"]
+
+    gold:
+      +schema: gold
+      +materialized: table
+
