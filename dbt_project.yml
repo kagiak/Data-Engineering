@@ -7,12 +7,28 @@ profile: healthcare_etl
 model-paths: ["models"]
 seed-paths: ["seeds"]
 
+# ---------------------------------------------------
+# SEEDS = BRONZE
+# ---------------------------------------------------
+seeds:
+  healthcare_etl:
+    +schema: bronze
+    +quote_columns: false
+
+    procedures:
+    patients:
+    encounters:
+    payers:
+
+# ---------------------------------------------------
+# MODELS
+# ---------------------------------------------------
 models:
   healthcare_etl:
 
-    # -----------------------------------------
-    # BRONZE — RAW DATA (from seeds)
-    # -----------------------------------------
+    # -------------------------------------------------
+    # BRONZE — RAW TABLES (from seeds)
+    # -------------------------------------------------
     bronze:
       +schema: bronze
       +materialized: table
@@ -23,37 +39,40 @@ models:
       encounters_raw:
       payers_raw:
 
-    # -----------------------------------------
-    # SILVER — CLEANED, TYPED, CONSISTENT
-    # -----------------------------------------
+    # -------------------------------------------------
+    # SILVER — CLEANED, STANDARDIZED, ENRICHED
+    # -------------------------------------------------
     silver:
       +schema: silver
-      +materialized: view
+      +materialized: table
 
+      stg_procedures:
       stg_encounters:
       stg_organizations:
       stg_patients:
       stg_payers:
-      stg_procedures:
 
-    # -----------------------------------------
-    # GOLD — BUSINESS MODELS
-    # -----------------------------------------
+    # -------------------------------------------------
+    # PYTHON MODEL — COST PER DAY
+    # -------------------------------------------------
+    python:
+      +schema: silver
+      +materialized: table
+
+      procedure_cost:
+
+    # -------------------------------------------------
+    # GOLD — DIMENSIONS + FACT + ANALYSIS
+    # -------------------------------------------------
     gold:
       +schema: gold
       +materialized: view
 
+      dim_procedure_codes:
+      dim_patients:
+      dim_payers:
+      fact_procedures:
+
       payer_ranking:
-      prodecure_cost: 
       top5_patients:
-      top5_procedures_daily_cost:    
-
-seeds:
-  healthcare_etl:
-    +schema: bronze
-    +quote_columns: false
-
-    procedures:
-    patients:
-    encounters:
-    payers:
+      top5_procedures_daily_cost:
