@@ -1,5 +1,5 @@
 select distinct
-    PATIENT_Id,
+    Id as PATIENT_Id,
     FIRST,
     LAST,
     BIRTHDATE,
