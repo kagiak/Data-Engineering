@@ -1,6 +1,7 @@
 select distinct
-    patient_id,
-    name,
-    birthdate,
-    gender
+    PATIENT_Id,
+    FIRST,
+    LAST,
+    BIRTHDATE,
+    GENDER
 from {{ ref('stg_patients') }}
