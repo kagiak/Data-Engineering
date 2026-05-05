@@ -7,4 +7,4 @@ select
   ZIP,
   LAT,
   LON
-from {{ ref('organizations_raw') }}
+from {{ ref('organizations') }}
