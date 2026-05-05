@@ -1,5 +1,5 @@
 select 
-  try_cast(Id as string) as Id,
+  try_cast(Id as string) as PATIENT_Id,
   BIRTHDATE,
   PREFIX,
   FIRST,
