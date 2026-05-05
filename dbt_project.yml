@@ -18,6 +18,7 @@ models:
       +materialized: table
 
       procedures_raw:
+      organizations_raw:
       patients_raw:
       encounters_raw:
       payers_raw:
@@ -29,36 +30,23 @@ models:
       +schema: silver
       +materialized: view
 
-      stg_procedures:
-      stg_patients:
       stg_encounters:
+      stg_organizations:
+      stg_patients:
       stg_payers:
+      stg_procedures:
 
     # -----------------------------------------
     # GOLD — BUSINESS MODELS
     # -----------------------------------------
     gold:
       +schema: gold
-      +materialized: table
-
-      dimensions:
-        dim_patients:
-        dim_payers:
-        dim_procedure_codes:
-
-      facts:
-        fact_procedures:
-
-    # -----------------------------------------
-    # ANALYSIS — FINAL SQL QUERIES
-    # -----------------------------------------
-    analysis:
-      +schema: analysis
       +materialized: view
 
       payer_ranking:
+      prodecure_cost: 
       top5_patients:
-      top5_procedures_daily_cost:
+      top5_procedures_daily_cost:    
 
 seeds:
   healthcare_etl:
