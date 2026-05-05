@@ -11,12 +11,11 @@ The project satisfies all requirements from Tasks 1–3 of the assignment.
 **Architecture**
 1. Bronze Layer — Raw Data
 The Bronze layer contains raw CSVs loaded as dbt seeds:
-
-    procedures
-    patients
-    encounters
-    payers
-    organizations
+    1.procedures
+    2.patients
+    3.encounters
+    4.payers
+    5.organizations
 These are stored as raw tables with no transformations applied.
 
 2. Silver Layer — Cleaned & Enriched Staging Models
