@@ -4,73 +4,82 @@ models:
   - name: stg_encounters
     description: "Cleaned encounter-level data."
     columns:
-      - name: encounter_id
+      - name: Id
         tests:
           - not_null
           - unique
-      - name: patient_id
+      - name: PATIENT
         tests:
           - not_null
   - name: stg_organizations
     description: "Cleaned organization data."
     columns:
-      - name: organization_id
+      - name: Id
         tests:
           - not_null
           - unique
-      - name: name
+      - name: NAME
         tests:
           - not_null
   - name: stg_patients
     description: "Cleaned patient demographic data."
     columns:
-      - name: patient_id
+      - name: Id
         tests:
           - not_null
           - unique
-      - name: gender
+      - name: BIRTHDATE
+        tests:
+            - not_null
+      - name: FIRST
+        tests:
+            - not_null
+      - name: LAST
+        tests:
+            - not_null        
+      - name: GENDER
         tests:
           - accepted_values:
               values: ['male', 'female', 'other']
   - name: stg_payers
     description: "Cleaned payer information."
     columns:
-      - name: payer_id
+      - name: Id
         tests:
           - not_null
           - unique
-      - name: payer_name
+      - name: NAME
         tests:
           - not_null
   - name: stg_procedures
     description: "Cleaned and enriched procedures data with duration and date parts."
     columns:
-      - name: patient
+      - name: PATIENT
         tests:
           - not_null
-      - name: encounter
+      - name: ENCOUNTER
         tests:
           - not_null
-      - name: code
+      - name: CODE
         tests:
           - not_null
-      - name: base_cost
-        tests:
-          - not_null
-          - greater_than: {value: 0}
-      - name: duration_seconds
+      - name: BASE_COST
         tests:
           - not_null
           - greater_than: {value: 0}
-      - name: year
+      - name: DURATION_SECONDS
         tests:
           - not_null
-      - name: month_number
+          - greater_than: {value: 0}
+      - name: YEAR
+        tests:
+          - not_null
+      - name: MONTH_NUMBER
         tests:
           - not_null
           - between:
               min_value: 1
               max_value: 12
-      - name: week_number
+      - name: WEEK_NUMBER
         tests:
           - not_null
