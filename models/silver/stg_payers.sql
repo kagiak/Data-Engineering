@@ -6,4 +6,4 @@ select
   STATE_HEADQUARTERED,
   ZIP,
   PHONE
-from {{ ref('stg_payers') }}
+from {{ ref('payers') }}
