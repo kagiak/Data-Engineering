@@ -65,3 +65,31 @@ Two payer‑specific marts were created:
     dm_humana
 
 Each mart filters the fact table by payer_name. These marts provide business‑ready datasets for each client.
+
+
+**Notes & Limitations**
+
+I intentionally kept this project as simple and lightweight as possible to focus on clarity, correctness, and demonstrating the core concepts of dbt, dimensional modeling, and Python-based transformations.
+Because of this, there are a few practical considerations:
+
+    The project structure is complete, but a fully production-ready dbt deployment would require additional elements, such as:
+        a fully configured profiles.yml
+        environment-specific connection settings
+        CI/CD integration
+        documentation site generation
+        more extensive testing coverage
+
+I have not executed the full pipeline end‑to‑end inside dbt Cloud or dbt Core, so the physical creation of all tables and views has not been validated in a live warehouse.
+
+The SQL and Python models are written to be syntactically correct and logically consistent, but depending on the warehouse (Databricks, Postgres, DuckDB, etc.), minor adjustments may be required.
+
+Despite these limitations, the project demonstrates:
+
+    a complete medallion architecture
+    a working star schema
+    Python + SQL hybrid transformations
+    data marts for two clients
+    dbt testing
+    clean, modular, interview‑ready code
+
+The goal was to deliver a clear, maintainable, and conceptually strong solution — and this structure provides a solid foundation for further development.
