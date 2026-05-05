@@ -1,5 +1,6 @@
 select
   Id,
+  NAME,
   ADDRESS,
   CITY,
   STATE_HEADQUARTERED,
