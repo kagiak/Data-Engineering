@@ -1,6 +1,6 @@
 select
-    payer,
-    sum(base_cost) as total_cost_paid
-from {{ ref('procedures_cost') }}
-group by payer
-order by total_cost_paid desc;
+    PAYER_NAME,
+    sum(BASE_COST) as TOTAL_COST
+from {{ ref('fact_procedures') }}
+group by PAYER_NAME
+order by TOTAL_COST desc
