@@ -18,4 +18,4 @@ select
   ZIP,
   LAT,
   LON
-from {{ ref('stg_patients') }}
+from {{ ref('patients') }}
