@@ -13,4 +13,4 @@ select
   PAYER_COVERAGE,
   try_cast(REASONCODE as integer) as REASONCODE,
   nitcap(trim(REASONDESCRIPTION)) as REASONDESCRIPTION
-from {{ ref('encounters_raw') }} 
+from {{ ref('encounters') }} 
