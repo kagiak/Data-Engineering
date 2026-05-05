@@ -9,7 +9,7 @@ with cleaned as (
         try_cast(BASE_COST as integer) as BASE_COST,          -- Convert numeric columns
         try_cast(REASONCODE as integer) as REASONCODE,        -- Convert numeric columns
         initcap(trim(REASONDESCRIPTION)) as REASONDESCRIPTION -- Trim whitespace and standardize casing
-    from {{ ref('procedures_raw') }}
+    from {{ ref('procedures') }}
 ),
 
 with_duration as (
