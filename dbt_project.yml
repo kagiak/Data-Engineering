@@ -62,7 +62,7 @@ models:
       procedure_cost:
 
     # -------------------------------------------------
-    # GOLD — DIMENSIONS + FACT + ANALYSIS
+    # GOLD — DIMENSIONS + FACT + ANALYSIS + MARTS
     # -------------------------------------------------
     gold:
       dimensions:
@@ -86,3 +86,10 @@ models:
         payer_ranking:
         top5_patients:
         top5_procedures_daily_cost:
+
+      marts:
+        +schema: gold
+        +materialized: table
+
+        dm_united_healthcare:
+        dm_humana:
