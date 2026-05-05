@@ -1,1 +1,21 @@
-
+select 
+  try_cast(Id as string) as Id,
+  BIRTHDATE,
+  PREFIX,
+  FIRST,
+  LAST,
+  SUFFIX,
+  MAIDEN,
+  MARITAL,
+  RACE,
+  ETHNICITY,
+  GENDER,
+  BIRTHPLACE,
+  ADDRESS,
+  CITY,
+  STATE,
+  COUNTY,
+  ZIP,
+  LAT,
+  LON
+from {{ ref('stg_patients') }}
