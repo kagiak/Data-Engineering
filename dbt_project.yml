@@ -7,68 +7,39 @@ profile: healthcare_etl
 model-paths: ["models"]
 seed-paths: ["seeds"]
 
-# ---------------------------------------------------
 # SEEDS = BRONZE
-# ---------------------------------------------------
 seeds:
   healthcare_etl:
     +schema: bronze
     +quote_columns: false
-
     procedures:
     patients:
     encounters:
     payers:
-
-# ---------------------------------------------------
+    
 # MODELS
-# ---------------------------------------------------
 models:
   healthcare_etl:
-
-    # -------------------------------------------------
-    # BRONZE — RAW TABLES (from seeds)
-    # -------------------------------------------------
-    bronze:
-      +schema: bronze
-      +materialized: table
-
-      procedures_raw:
-      organizations_raw:
-      patients_raw:
-      encounters_raw:
-      payers_raw:
-
-    # -------------------------------------------------
     # SILVER — CLEANED, STANDARDIZED, ENRICHED
-    # -------------------------------------------------
     silver:
       +schema: silver
       +materialized: table
-
       stg_procedures:
       stg_encounters:
       stg_organizations:
       stg_patients:
       stg_payers:
-
-    # -------------------------------------------------
     # PYTHON MODEL — COST PER DAY
-    # -------------------------------------------------
     python:
       +schema: silver
       +materialized: table
-
       procedure_cost:
-
-    # -------------------------------------------------
+    
     # GOLD — DIMENSIONS + FACT + ANALYSIS + MARTS
-    # -------------------------------------------------
     gold:
       dimensions:
         +schema: gold
         +materialized: table
-
         dim_procedure_codes:
         dim_patients:
         dim_payers:
@@ -76,13 +47,11 @@ models:
       facts:
         +schema: gold
         +materialized: table
-
         fact_procedures:
 
       analysis:
         +schema: gold
         +materialized: view
-
         payer_ranking:
         top5_patients:
         top5_procedures_daily_cost:
@@ -90,6 +59,5 @@ models:
       marts:
         +schema: gold
         +materialized: table
-
         dm_united_healthcare:
         dm_humana:
