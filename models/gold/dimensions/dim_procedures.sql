@@ -1,5 +1,5 @@
 select distinct
-    code,
-    description,
-    reasondescription
+    CODE,
+    DESCRIPTION,
+    REASONDESCRIPTION
 from {{ ref('stg_procedures') }}
