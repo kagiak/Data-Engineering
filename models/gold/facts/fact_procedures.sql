@@ -1,6 +1,6 @@
 with proc as (
     select *
-    from {{ ref('procedure_cost') }}
+    from {{ ref('dim_procedures') }}
 ),
 
 enc as (
