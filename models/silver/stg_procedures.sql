@@ -15,7 +15,8 @@ with cleaned as (
 with_duration as (
     select
         *,
-        unix_timestamp(stop) - unix_timestamp(start) as DURATION_SECONDS  -- Find duration in seconds
+        unix_timestamp(stop) - unix_timestamp(start) as DURATION_SECONDS,                -- Find duration in seconds
+        base_cost * (86400/unix_timestamp(stop) - unix_timestamp(start)) as COST_PER_DAY -- Calculate cost per day
     from cleaned
 ),
 
