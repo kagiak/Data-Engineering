@@ -1,5 +1,1 @@
-select distinct
-    CODE,
-    DESCRIPTION,
-    REASONDESCRIPTION
-from {{ ref('stg_procedures') }}
+select distinct * from {{ ref('stg_procedures') }}
