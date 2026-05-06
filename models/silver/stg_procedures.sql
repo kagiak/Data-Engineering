@@ -30,4 +30,4 @@ with_date_parts as (
     from with_duration
 )
 
-select * from with_date_parts
+select distinct * from with_date_parts
