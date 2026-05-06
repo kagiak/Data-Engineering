@@ -1,7 +1,13 @@
 def model(dbt, session):
+    
+    -- configure table
+    dbt.config(materialized="table", alias="procedures_cost")
+    -- load input table
+    df = dbt.ref("stg_procedures")
+    pdf = df.to_pandas()
 
-    df = dbt.ref("stg_procedures").to_pandas()
+    -- calculate cost per day
     SECONDS_PER_DAY = 86400
-    df["COST_PER_DAY"] = df["base_cost"] * (SECONDS_PER_DAY / df["DURATION_SECONDS"])
+    pdf["COST_PER_DAY"] = pdf["base_cost"] * (SECONDS_PER_DAY / pdf["DURATION_SECONDS"])
 
-    return df
+    return pdf
