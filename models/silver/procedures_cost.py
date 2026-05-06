@@ -7,7 +7,7 @@ def model(dbt, session):
     # load input table
     df = dbt.ref("stg_procedures")
     
-    # Compute cost per day using Spark expressions. 
+    # Compute cost per day 
     # df = df.withColumn(
     #     "COST_PER_DAY",
     #     F.col("BASE_COST") * (F.lit(86400) / F.col("DURATION_SECONDS"))
