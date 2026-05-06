@@ -3,8 +3,8 @@ with procedure_stats as (
         fp.CODE,
         dp.DESCRIPTION,
         percentile_approx(fp.COST_PER_DAY, 0.5) as MEDIAN_COST_PER_DAY
-    from {{ ref('fact_procedures') }} fp
-    left join {{ ref('dim_procedures') }} dp
+    from {{ ref('fact_procedures') }} as fp
+    left join {{ ref('dim_procedures') }} as dp
       on fp.CODE = dp.CODE
     group by fp.CODE, dp.DESCRIPTION
 )
