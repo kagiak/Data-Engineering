@@ -2,9 +2,8 @@ This project implements a complete end‑to‑end ELT pipeline for healthcare pr
 
     Bronze → raw data (seeds)
     Silver → cleaned & enriched staging models
-    Python → cost‑per‑day calculation
-    Gold → dimensions, fact table, analysis queries
-    Marts → payer‑specific data marts (Task 3)
+    Python → filtered on cost‑per‑day calculation
+    Gold → dimensions, fact table, analysis queries and marts payer specific
 
 The project satisfies all requirements from Tasks 1–3 of the assignment.
 
@@ -27,6 +26,8 @@ The Silver layer standardizes and enriches the data:
     - converts timestamps
     - calculates duration_seconds
     - extracts date parts (year, month_number, week_number, day_name)
+    - calculates cost per day
+    - creates a python table with filter on costs per day (procedure_cost.py) 
 
 A schema.yml file defines tests such as:
     - not_null
@@ -34,9 +35,6 @@ A schema.yml file defines tests such as:
     - accepted_values
     - greater_than
 This ensures data quality before moving to Gold.
-
-Python Model — Cost Per Day in Silver. A dbt Python model (procedure_cost.py) computes: cost_per_day = base_cost * (86400 / duration_seconds)
-This satisfies the requirement to calculate cost/day using Python.
 
 3. Gold Layer — Dimensions, Fact, Analysis & Marts
 Dimensions
