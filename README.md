@@ -27,7 +27,10 @@ The Silver layer standardizes and enriches the data:
     - calculates duration_seconds
     - extracts date parts (year, month_number, week_number, day_name)
     - calculates cost per day
-    - creates a python table with filter on costs per day (procedure_cost.py) 
+    - creates a python table with filter on costs per day (procedure_cost.py)
+      
+I decided to separate the calculation of COST_PER_DAY from the filtering step.
+The calculation happens in **stg_procedures**, ensuring that all downstream models (including the Task 2 analytical queries) have access to the complete dataset. The filtering (procedures costing less than 30,000 per day) is implemented in the Python model procedure_cost, as required by Task 1.
 
 A schema.yml file defines tests such as:
     - not_null
