@@ -4,8 +4,8 @@ with patient_costs as (
         dp.FIRST,
         dp.LAST,
         sum(fp.BASE_COST) as TOTAL_COST
-    from {{ ref('fact_procedures') }} fp
-    left join {{ ref('dim_patients') }} dp
+    from {{ ref('fact_procedures') }} as fp
+    left join {{ ref('dim_patients') }} as dp
       on fp.PATIENT = dp.PATIENT_ID
     group by fp.PATIENT, dp.FIRST, dp.LAST
 )
